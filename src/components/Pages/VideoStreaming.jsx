@@ -50,12 +50,12 @@ const VideoStreaming = ({ type, provider, server }) => {
   return (
     <>
       <section className="relative">
-        <div className="wrapper absolute inset-0">
+        <div className="absolute inset-0">
           <ReactPlayer
             url={sourcesUrl}
             controls={true}
             volume={1}
-            className="custom-player"
+            playing={true}
             width="100%"
             height={isMobile ? "50vh" : "100vh"}
             config={{
