@@ -32,7 +32,6 @@ const SearchBar = ({ placeholder }) => {
           </button>
         </div>
       </form>
-      <div className="bg-red-500">{search}</div>
     </>
   )
 }
