@@ -3,9 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
-import Loading from "/loading.gif";
+import Loading from "/assets/images/loading.gif";
+import lozad from 'lozad'
 
 const Recent = ({ provider }) => {
+  const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+
   const [data, setData] = useState([]);
   const [hasNextPage, setNextPage] = useState();
   let [currentPage, setCurrentPage] = useState('');
@@ -54,7 +58,7 @@ const Recent = ({ provider }) => {
 
       {isLoading ?
         <div className="flex flex-col justify-center items-center">
-          <img src={Loading} alt="Loading..." className="w-3/4 md:w-1/2" />
+          <img src={Loading} alt="Loading..." className="lozad w-3/4 md:w-1/2" loading="lazy"/>
           <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
             Just like Saitama, we are taking hits to bring you the best anime!
           </p>
@@ -79,7 +83,8 @@ const Recent = ({ provider }) => {
                   <img
                     src={result.image}
                     alt={result.title}
-                    className="z-0 h-full w-full rounded-md object-cover"
+                    className="lozad z-0 h-full w-full rounded-md object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                   <div className="absolute bottom-4 left-4 text-left">

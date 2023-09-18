@@ -1,12 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
+import lozad from 'lozad'
 
 const ErrorPage = () => {
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+    observer.observe();
     return (
-        <div className="h-screen  bg-cover bg-center bg-gradient-to-r from-black/80 via-transparent to-black/80 flex flex-col items-center justify-center" 
-        style={{
-            backgroundImage: `url('/404.gif')`,
-        }}
+        <div className="lozad h-screen  bg-cover bg-center bg-gradient-to-r from-black/80 via-transparent to-black/80 flex flex-col items-center justify-center"
+            style={{
+                backgroundImage: `url('/assets/images/404.gif')`,
+            }}
         >
             <div className="text-pro-red drop-shadow-xl text-2xl sm:text-4xl text-center font-pro-bold font-extrabold mix-blend-difference">
                 Lost in Gojo's Infinity Void, just like Jogo encountering the limitless darkness, where the Six Eyes oversee the Cursed Technique of Broken Links.

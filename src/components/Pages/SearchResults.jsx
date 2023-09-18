@@ -4,9 +4,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Loading from "/loading.gif";
+import Loading from "/assets/images/loading.gif";
+import lozad from 'lozad'
 
 const SearchResults = ({ type, provider }) => {
+    const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+
     const { query } = useParams();
     const [data, setData] = useState([]);
     const [hasNextPage, setNextPage] = useState();
@@ -55,8 +59,8 @@ const SearchResults = ({ type, provider }) => {
             <section>
                 {isLoading ?
                     <div className="flex flex-col justify-center items-center h-screen">
-                        <img src={Loading} alt="Loading..." />
-                        <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
+                        <img src={Loading} alt="Loading..." loading='lazy'/>
+                        <p className="lozad text-pro-red font-pro-bold font-semibold text-2xl text-center">
                             Just like Saitama, we are taking hits to bring you the best anime!
                         </p>
                     </div>
@@ -79,7 +83,8 @@ const SearchResults = ({ type, provider }) => {
                                         <img
                                             src={result.image}
                                             alt={result.title}
-                                            className="z-0 h-full w-full rounded-md object-cover"
+                                            className="lozad z-0 h-full w-full rounded-md object-cover"
+                                            loading='lazy'
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                                         <div className="absolute bottom-4 left-4 text-left">
