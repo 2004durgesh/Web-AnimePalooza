@@ -15,7 +15,7 @@ const DownloadButton = ({ btnText }) => {
 
   return (
     <>
-      <a className=" bg-green-500 text-white font-pro-regular py-2 px-4 ml-4 my-2 rounded-lg hover:bg-green-600 flex items-center space-x-2"
+      <a className=" bg-green-500 text-white font-pro-regular py-2 px-4 ml-4 my-2 rounded-lg hover:bg-green-600 flex items-center space-x-2 cursor-pointer"
         onClick={downloadFile}
         download
       >
