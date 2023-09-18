@@ -21,18 +21,18 @@ const HeroSection = () => {
                 <Swiper
                     centeredSlides={true}
                     loop={true}
-                    autoplay={{
-                        delay: 10000,
-                        disableOnInteraction: true,
-                    }}
+                    // autoplay={{
+                    //     delay: 10000,
+                    //     disableOnInteraction: true,
+                    // }}
                     pagination={{
                         dynamicBullets: true,
                     }}
                     modules={[Autoplay, Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    <SwiperSlide><AnimeSlides /></SwiperSlide>
                     <SwiperSlide><MangaSlides /></SwiperSlide>
+                    <SwiperSlide><AnimeSlides /></SwiperSlide>
                     <SwiperSlide><MoviesSlides /></SwiperSlide>
                 </Swiper>
             </div>
