@@ -8,9 +8,10 @@ import { AiOutlineDownload, AiOutlineSetting } from "react-icons/ai"
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import { Link } from "react-router-dom/dist";
+import { Helmet } from "react-helmet";
 
 const VideoStreaming = ({ type, provider, server }) => {
-  const { episodeId, mediaId } = useParams()
+  const { episodeId, mediaId,title,episodeNumber } = useParams()
   const [sourcesUrl, setSourcesUrl] = useState("")
   const [download, setDownload] = useState('')
   const [sources, setSources] = useState([])
@@ -22,6 +23,7 @@ const VideoStreaming = ({ type, provider, server }) => {
   } else {
     url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}?server=${server}`;
   }
+  console.log(url)
   const fetchData = async () => {
     try {
       const { data } = await axios.get(url);
@@ -49,6 +51,10 @@ const VideoStreaming = ({ type, provider, server }) => {
 
   return (
     <>
+    <Helmet>
+    <title>{`Watch ${title} Online | AnimePalooza Streaming | ${type} Episode ${episodeNumber} of ${title}`}</title>
+      <meta name="description" content={`Stream ${title} on AnimePalooza - Watch ${type} episode ${episodeNumber} of ${title}. Enjoy high-quality streaming and download options. Explore more anime episodes and movies today!`} />
+    </Helmet>
       <section className="relative">
         <div className="absolute inset-0">
           <ReactPlayer

@@ -5,10 +5,11 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import Loading from "/assets/images/loading.gif";
 import lozad from 'lozad'
+import { Helmet } from "react-helmet";
 
-const Recent = ({ provider }) => {
+const Recent = ({ type,provider }) => {
   const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-observer.observe();
+  observer.observe();
 
   const [data, setData] = useState([]);
   const [hasNextPage, setNextPage] = useState();
@@ -17,7 +18,7 @@ observer.observe();
   const location = useLocation();
   const currentPathname = location.pathname;
 
-  const url = `https://consumet-api-pied.vercel.app/anime/${provider}/recent-episodes`;
+  const url = `https://consumet-api-pied.vercel.app/${type}/${provider}/recent-episodes`;
 
   const fetchData = async (currentPage) => {
     try {
@@ -50,7 +51,14 @@ observer.observe();
     }
   };
 
-  return (
+  return (<>
+    <Helmet>
+      <title>AnimePalooza - Latest Anime Episodes | Watch Anime Online</title>
+      <meta
+        name="description"
+        content="Stay up to date with the latest anime episodes on AnimePalooza. Explore a wide selection of new releases and enjoy your favorite anime online. Join the anime community today!"
+      />
+    </Helmet>
     <section>
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-pro-bold font-bold text-pro-red pl-4 my-10">
         Boost Your Anime Journey with the Latest Episodes!
@@ -58,7 +66,7 @@ observer.observe();
 
       {isLoading ?
         <div className="flex flex-col justify-center items-center">
-          <img src={Loading} alt="Loading..." className="lozad w-3/4 md:w-1/2" loading="lazy"/>
+          <img src={Loading} alt="Loading... gif, saitama getting hit by stone" className="lozad w-3/4 md:w-1/2" loading="lazy" />
           <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
             Just like Saitama, we are taking hits to bring you the best anime!
           </p>
@@ -102,6 +110,8 @@ observer.observe();
         </>
       }
     </section>
+  </>
+
   );
 };
 

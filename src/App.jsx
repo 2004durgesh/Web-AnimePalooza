@@ -5,7 +5,7 @@ import Manga from "./components/Manga/Manga"
 import Movies from "./components/Movies/Movies"
 import News from "./components/News/News"
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Info from "./components/Anime/Info";
 import VideoStreaming from "./components/Pages/VideoStreaming.jsx";
 import SearchResults from "./components/Pages/SearchResults";
@@ -21,7 +21,7 @@ function App() {
           <Route path="/anime" element={<Anime />} />
           <Route path="/anime/info/:id" element={<Info />} />
           <Route path="/anime/search/:query" element={<SearchResults type="anime" provider="gogoanime"/>} />
-          <Route path="/anime/watch/:episodeId" element={<VideoStreaming type="anime" provider="gogoanime" server="gogocdn" />} />
+          <Route path="/anime/watch/:episodeId/:title/:episodeNumber" element={<VideoStreaming type="anime" provider="gogoanime" server="gogocdn" />} />
           <Route path="/manga" element={<Manga />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/news" element={<News />} />

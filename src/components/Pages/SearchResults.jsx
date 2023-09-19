@@ -6,6 +6,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Loading from "/assets/images/loading.gif";
 import lozad from 'lozad'
+import { Helmet } from 'react-helmet';
 
 const SearchResults = ({ type, provider }) => {
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'
@@ -56,10 +57,14 @@ observer.observe();
 
     return (
         <>
+        <Helmet>
+            <title>AnimePalooza - Anime Search Results | Find Your Favorite Shows</title>
+            <meta name="description" content="Explore the search results on AnimePalooza to find your favorite anime shows and movies. Discover a vast collection of anime content, including episodes, movies, and more. Start your anime journey today!" />
+        </Helmet>
             <section>
                 {isLoading ?
                     <div className="flex flex-col justify-center items-center h-screen">
-                        <img src={Loading} alt="Loading..." loading='lazy'/>
+                        <img src={Loading} alt="Loading... gif, saitama getting hit by stone" loading='lazy'/>
                         <p className="lozad text-pro-red font-pro-bold font-semibold text-2xl text-center">
                             Just like Saitama, we are taking hits to bring you the best anime!
                         </p>

@@ -8,9 +8,9 @@ const Anime = () => {
   return (
     <>
       <SearchBar placeholder="Search for action-packed anime adventures..."/>
-      <Trending provider={'gogoanime'} />
+      <Trending type={'anime'} provider={'gogoanime'} />
       <Divider />
-      <Recent provider={'gogoanime'} />
+      <Recent type={'anime'} provider={'gogoanime'} />
     </>
   );
 };

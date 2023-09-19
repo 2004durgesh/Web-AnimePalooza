@@ -5,10 +5,11 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import Loading from "/assets/images/loading.gif";
 import lozad from 'lozad'
+import { Helmet } from "react-helmet";
 
-const Trending = ({ provider }) => {
+const Trending = ({ type,provider }) => {
   const observer = lozad(); // lazy loads elements with default selector as '.lozad'
-observer.observe();
+  observer.observe();
 
   const [data, setData] = useState([]);
   const [hasNextPage, setNextPage] = useState();
@@ -17,7 +18,7 @@ observer.observe();
   const location = useLocation();
   const currentPathname = location.pathname;
 
-  const url = `https://consumet-api-pied.vercel.app/anime/${provider}/top-airing`;
+  const url = `https://consumet-api-pied.vercel.app/${type}/${provider}/top-airing`;
 
   const fetchData = async (currentPage) => {
     try {
@@ -52,6 +53,13 @@ observer.observe();
 
   return (
     <>
+      <Helmet>
+        <title>AnimePalooza - Trending Anime Episodes | Watch Anime Online</title>
+        <meta
+          name="description"
+          content="Discover the hottest anime and trending shows on AnimePalooza. Explore a collection of popular anime series and movies that are capturing the hearts of fans. Join the anime hype today!"
+        />
+      </Helmet>
       <section>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-pro-bold font-bold text-pro-red pl-4 my-8">
           Trending like Goku going Super Saiyan!
@@ -59,7 +67,7 @@ observer.observe();
 
         {isloading ?
           <div className="flex flex-col justify-center items-center">
-            <img src={Loading} alt="Loading..."  className="lozad w-3/4 md:w-1/2" loading="lazy"/>
+            <img src={Loading} alt="Loading... gif, saitama getting hit by stone" className="lozad w-3/4 md:w-1/2" loading="lazy" />
             <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
               Just like Saitama, we are taking hits to bring you the best anime!
             </p>

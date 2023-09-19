@@ -69,7 +69,7 @@ const Info = () => {
                     <img src={data.image} alt="" className="h-full w-full transition duration-300 ease-in-out hover:scale-125" />
                 </div>
             </section>
-            <Episodes episodes={episodes} />
+            <Episodes episodes={episodes} title={data.title}/>
         </>
     );
 };
