@@ -23,7 +23,8 @@ const Navbar = () => {
     <>
       {/* Navigation bar */}
       <nav className='flex items-center py-4 px-2 absolute top-0 w-full z-10'>
-        <h1 className='text-pro-red text-secondary font-pro-bold font-extrabold lg:text-5xl md:text-4xl text-3xl'>
+        <h1 className='logo text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
+        tracking-wider select-none'>
           AnimePalooza
         </h1>
 

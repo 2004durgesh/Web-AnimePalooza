@@ -7,10 +7,10 @@ import SearchBar from "../SearchBar";
 const Anime = () => {
   return (
     <>
-      <SearchBar placeholder="Search for action-packed anime adventures..."/>
-      <Trending type={'anime'} provider={'gogoanime'} />
+      <SearchBar placeholder="Search for action-packed anime adventures..." type="anime" provider="gogoanime"/>
+      <Trending type={'anime'} provider={'gogoanime'} typeOfContent={'top-airing'}/>
       <Divider />
-      <Recent type={'anime'} provider={'gogoanime'} />
+      <Recent type={'anime'} provider={'gogoanime'} typeOfContent={'recent-episodes'}/>
     </>
   );
 };

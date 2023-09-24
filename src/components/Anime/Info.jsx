@@ -35,7 +35,7 @@ const Info = () => {
 
     return (
         <>
-            <section className="font-pro-bold flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
+            <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
                 <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
                     style={{
                         backgroundSize: "30rem 30rem",
@@ -43,20 +43,20 @@ const Info = () => {
                     }}>
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-pro-bold font-bold text-white my-4">{data.title}</h1>
                     {genres.map((genre, index) => (
-                        <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] text-gray-200 md:text-gray-400 border-gray-400 px-3 py-1 text-[10px] font-semibold">{genre}</span>
+                        <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] text-gray-200 md:text-gray-400 border-gray-400 px-3 py-1 text-[10px] font-pro-medium font-semibold tracking-wider">{genre}</span>
                     ))}
-                    <p className="font-pro-regular font-semibold text-gray-200 md:text-gray-400 my-2 text-xs sm:text-sm">{data.description}</p>
+                    <p className="font-pro-medium font-semibold text-gray-200 md:text-gray-400 my-2 text-xs sm:text-sm">{data.description}</p>
                     {data.status === "Ongoing" ?
-                        <span className="flex flex-row items-center text-gray-200 md:text-gray-400 gap-4">
+                        <span className="flex flex-row items-center font-pro-medium text-gray-200 md:text-gray-400 gap-4">
                             <AiOutlineClockCircle color="gray" size={20} />Ongoing
                         </span>
                         :
                         <span className="flex flex-row items-center text-gray-400 gap-4">
                             <RiCheckDoubleFill color="gray" size={20} />
                         </span>}
-                    <div className=" text-gray-200 md:text-gray-400 my-2">
+                    <div className=" text-gray-200 md:text-gray-400 my-2 font-pro-medium">
                         Othername(s): {otherName.map((genre, index) => (
-                            <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold">{genre}</span>
+                            <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{genre}</span>
                         ))}
                     </div>
                 </div>

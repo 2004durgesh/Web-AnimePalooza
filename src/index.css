@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body{
     background-color: black;
+}
+.logo{
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
 }
 
 @font-face {
@@ -16,7 +23,7 @@ body{
 }
 @font-face {
     font-family: 'Netflix-bold';
-    src: url('fonts/NetflixSans_W_Bd.woff2') format('woff');
+    src: url('fonts/NetflixSans_W_Blk.woff2') format('woff');
 }
 
 .swiper {

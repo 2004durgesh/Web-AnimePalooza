@@ -10,27 +10,29 @@ import 'rodal/lib/rodal.css';
 import { Link } from "react-router-dom/dist";
 import { Helmet } from "react-helmet";
 
-const VideoStreaming = ({ type, provider, server }) => {
-  const { episodeId, mediaId,title,episodeNumber } = useParams()
+const VideoStreaming = ({ type }) => {
+  const { provider,episodeId,providerHeader, mediaId,title,episodeNumber } = useParams()
   const [sourcesUrl, setSourcesUrl] = useState("")
   const [download, setDownload] = useState('')
   const [sources, setSources] = useState([])
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [visible, setVisible] = useState(false);
   let url
-  if (mediaId) {
-    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}/${mediaId}?server=${server}`;
+  if (type==='movies') {
+    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}`;
   } else {
-    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}?server=${server}`;
+    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}`;
   }
   console.log(url)
   const fetchData = async () => {
     try {
       const { data } = await axios.get(url);
-      setSourcesUrl(data.sources[3].url);
+      if(provider==="gogoanime")setSourcesUrl(data.sources[3].url);
+      if(provider==="dramacool")setSourcesUrl(data.sources[0].url);
+      if(provider==="flixhq")setSourcesUrl(data.sources[3].url);
       setDownload(data.download)
       setSources(data.sources)
-      console.log(typeof (data.sources), data.sources);
+      console.log(typeof(data.sources), data.sources);
       return data;
     } catch (err) {
       throw new Error(err.message);
@@ -72,9 +74,9 @@ const VideoStreaming = ({ type, provider, server }) => {
           />
         </div>
         <div className="absolute top-0 right-0 flex flex-row my-10 space-x-5 md:space-x-10 mx-10">
-          <Link to={`${download}`} target="_blank">
+          {download?<Link to={`${download}`} target="_blank">
             <AiOutlineDownload className="cursor-pointer" color="white" size={isMobile ? 20 : 30} />
-          </Link>
+          </Link>:null}
           <AiOutlineSetting className="cursor-pointer" color="white" size={isMobile ? 20 : 30} onClick={show} />
         </div>
         <div>
