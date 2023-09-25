@@ -3,8 +3,7 @@ import FlixhqInfo from "./FlixhqInfo"
 import DramacoolInfo from "./DramacoolInfo"
 
 const MoviesInfo = () => {
-    const{provider,type,id}=useParams()
-    console.log(provider,type,id)
+    const{provider}=useParams()
     
   return (
     <>

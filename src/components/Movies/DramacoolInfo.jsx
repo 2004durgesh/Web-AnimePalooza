@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
 import { AiOutlineClose } from "react-icons/ai";
+import { Helmet } from "react-helmet";
 
 const serverOptions = ["asianload", "mixdrop", "streamtape", "streamsb"];
 const DramacoolInfo = () => {
@@ -13,9 +14,7 @@ const DramacoolInfo = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [selectedServer, setSelectedServer] = useState("");
     const { provider, providerHeader, id } = useParams()
-    console.log(provider, providerHeader, id)
     const url = `https://consumet-api-pied.vercel.app/movies/${provider}/info?id=${providerHeader}/${id}`;
-    console.log(url)
 
 
     const fetchData = async () => {
@@ -34,6 +33,10 @@ const DramacoolInfo = () => {
     }, []);
     return (
         <>
+            <Helmet>
+                <title>{`${data.title} - ${data.releaseDate}`} | Your DramaCool Streaming</title>
+                <meta name="description" content={`Watch ${data.title} on DramaCool. ${data.type} with episodes, cast, and more. Explore ${data.title} now.`} />
+            </Helmet>
             <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
                 <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
                     style={{
@@ -57,7 +60,6 @@ const DramacoolInfo = () => {
                             value={selectedServer}
                             onChange={(e) => {
                                 setSelectedServer(e.target.value);
-                                console.log("Selected Server:", e.target.value);
                             }}
                         >
                             <option value="">Select a server</option>
@@ -80,7 +82,7 @@ const DramacoolInfo = () => {
                         clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)'
                     }}
                 >
-                    <img src={data.image} alt="" className="h-full w-full transition duration-300 ease-in-out hover:scale-125" />
+                    <img src={data.image} alt={`image of ${data.title}`} className="h-full w-full transition duration-300 ease-in-out hover:scale-125" loading="lazy" />
                 </div>
             </section>
             <section className="flex items-center justify-center mx-auto my-4 max-w-5xl">

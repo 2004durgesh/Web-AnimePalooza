@@ -6,6 +6,7 @@ import { RiCheckDoubleFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import Episodes from "./Episodes";
+import { Helmet } from "react-helmet";
 
 const Info = () => {
     const [data, setData] = useState({});
@@ -35,6 +36,10 @@ const Info = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{`${data.title} - ${data.status === "Ongoing" ? "Ongoing" : "Completed"}`} | Your Anime Info</title>
+                <meta name="description" content={`Get information about ${data.title} anime. Genres: ${genres.join(", ")}. Description: ${data.description}. Status: ${data.status}. Other names: ${otherName.join(", ")}.`} />
+            </Helmet>
             <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
                 <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
                     style={{
@@ -66,10 +71,10 @@ const Info = () => {
                         clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)'
                     }}
                 >
-                    <img src={data.image} alt="" className="h-full w-full transition duration-300 ease-in-out hover:scale-125" />
+                    <img src={data.image} alt={`image of ${data.title}`} className="h-full w-full transition duration-300 ease-in-out hover:scale-125" loading="lazy" />
                 </div>
             </section>
-            <Episodes episodes={episodes} title={data.title}/>
+            <Episodes episodes={episodes} title={data.title} />
         </>
     );
 };

@@ -45,13 +45,13 @@ const Navbar = () => {
             <CgClose
               size={40}
               color='white'
-              className='ml-auto relative z-50 block sm:hidden mr-4'
+              className='ml-auto relative z-50 block sm:hidden mr-4 mt-4'
               onClick={closeNav}
             />
             {/* Background overlay */}
             <div className='fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-md bg-opacity-40 z-[9]'></div>
             {/* Navigation menu items */}
-            <ul className='bg-transparent fixed top-0 right-[0%] h-[70vh] w-72 transition-all space-y-4 px-6 py-14 m-4 rounded-2xl z-10'>
+            <ul className='bg-pro-red fixed top-0 right-[0%] h-[70vh] w-72 transition-all space-y-4 px-6 py-14 m-4 rounded-2xl z-10'>
               {listItems.map((item) => (
                 <li className='font-semibold text-accent text-lg text-white font-pro-medium capitalize cursor-pointer' key={item}>
                   {<Link to={`/${item}`}>{item}</Link>}

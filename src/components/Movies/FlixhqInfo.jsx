@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlineStar } from "react-icons/ai";
 import { FcCalendar, FcFilmReel, FcGlobe } from 'react-icons/fc'
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
+import { Helmet } from "react-helmet";
 
 const serverOptions = ["mixdrop", "vidcloud", "upcloud"];
 const FlixhqInfo = () => {
@@ -34,6 +35,10 @@ const FlixhqInfo = () => {
     }, []);
     return (
         <>
+            <Helmet>
+                <title>{`${data.title} - ${data.releaseDate}`} | Your Movie/TV Show Website</title>
+                <meta name="description" content={`Explore ${data.title}, a ${data.releaseDate} release. Learn more about this ${data.type} and its cast, episodes, and genres.`} />
+            </Helmet>
             <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
                 <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
                     style={{
@@ -73,7 +78,6 @@ const FlixhqInfo = () => {
                             value={selectedServer}
                             onChange={(e) => {
                                 setSelectedServer(e.target.value);
-                                console.log("Selected Server:", e.target.value);
                             }}
                         >
                             <option value="">Select a server</option>
@@ -98,7 +102,7 @@ const FlixhqInfo = () => {
                         clipPath: 'polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%)'
                     }}
                 >
-                    <img src={data.image} alt="" className="h-full w-full transition duration-300 ease-in-out hover:scale-125" />
+                    <img src={data.image} alt={`image of ${data.title}`} className="h-full w-full transition duration-300 ease-in-out hover:scale-125" loading="lazy" />
                 </div>
 
             </section>
@@ -108,7 +112,7 @@ const FlixhqInfo = () => {
                         {episodes.length} Episodes
                     </h1>
                     {episodes.map((element) => (
-                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}/${selectedServer || "vidcloud"}`} key={element.id}>
+                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}/${selectedServer || "upcloud"}`} key={element.id}>
                             <div className="flex flex-col hover:bg-gray-800 border-b-2 border-gray-800 rounded-lg p-4 my-2 transition duration-300 ease-in-out hover:scale-105">
                                 <span className="text-white text-lg font-pro-regular">{element.title}</span>
                                 {data.type === 'TV Series' ? <span className='text-xs text-[#D3D3D3]'>Episode {element.number} Season{element.season}</span> : null}

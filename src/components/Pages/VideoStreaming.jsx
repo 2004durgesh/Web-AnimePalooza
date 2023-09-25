@@ -23,16 +23,13 @@ const VideoStreaming = ({ type }) => {
   } else {
     url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}`;
   }
-  console.log(url)
   const fetchData = async () => {
     try {
       const { data } = await axios.get(url);
       if (provider === "gogoanime") setSourcesUrl(data.sources[3].url);
-      if (provider === "dramacool") setSourcesUrl(data.sources[0].url);
-      if (provider === "flixhq") setSourcesUrl(data.sources[0].url);
+      else if (provider === "dramacool" ||provider === "flixhq") setSourcesUrl(data.sources[0].url);
       setDownload(data.download)
       setSources(data.sources)
-      console.log(typeof (data.sources), data.sources);
       return data;
     } catch (err) {
       throw new Error(err.message);

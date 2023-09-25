@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import Dramacool from "/assets/images/dramacool.jpeg"
-import Flixhq from "/assets/images/flixhq.jpeg"
+import Flixhq from "/assets/images/flixhq.png"
 import { Link } from "react-router-dom"
 import { useLocation } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ const Providers = () => {
                 <div className="flex flex-col text-white space-y-4">
                     <Link to={`${currentPathName}/dramacool`}>
                         <div className="flex items-center space-x-4">
-                            <img src={Dramacool} alt="Dramacool Providers logo" className="w-20 sm:w-32 md:w-40" />
+                            <img src={Dramacool} alt="Dramacool Providers logo" className="w-20 sm:w-32 md:w-40" loading="eager"/>
                             <div className="flex flex-col">
                                 <p className="font-pro-medium font-semibold">Dramacool</p>
                                 <span className="text-lg sm:text-2xl md:text-3xl font-pro-regular">Your Ultimate destination for Asian Dramas and Movies</span>
@@ -30,7 +30,7 @@ const Providers = () => {
                     <hr />
                     <Link to={`${currentPathName}/flixhq`}>
                         <div className="flex items-center space-x-4">
-                            <img src={Flixhq} alt="FlixHQ Providers logo" className="w-20 sm:w-32 md:w-40" />
+                            <img src={Flixhq} alt="FlixHQ Providers logo" className="w-20 sm:w-32 md:w-40" loading="eager"/>
                             <div className="flex flex-col">
                                 <p className="font-pro-medium font-semibold">FlixHQ</p>
                                 <span className="text-lg sm:text-2xl md:text-3xl font-pro-regular">Streaming Global Entertainment at Your FingerTips</span>
