@@ -26,26 +26,20 @@ const VideoStreaming = ({ type }) => {
   console.log(url)
   const fetchData = async () => {
     try {
-      const response = await fetch(url,{mode: 'cors'});
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      if (provider === "gogoanime") {
-        setSourcesUrl(data.sources[3].url);
-      } else if (provider === "dramacool" || provider === "flixhq") {
-        setSourcesUrl(data.sources[0].url);
-      }
-      setDownload(data.download);
-      setSources(data.sources);
-      console.log(typeof data.sources, data.sources);
+      const { data } = await axios.get(url);
+      if (provider === "gogoanime") setSourcesUrl(data.sources[3].url);
+      if (provider === "dramacool") setSourcesUrl(data.sources[0].url);
+      if (provider === "flixhq") setSourcesUrl(data.sources[0].url);
+      setDownload(data.download)
+      setSources(data.sources)
+      console.log(typeof (data.sources), data.sources);
       return data;
     } catch (err) {
       throw new Error(err.message);
     }
+  };
 
-  }
+  
     const show = () => {
       setVisible(true);
     };
@@ -114,6 +108,6 @@ const VideoStreaming = ({ type }) => {
         </section>
       </>
     );
-  };
+              };
 
   export default VideoStreaming;
