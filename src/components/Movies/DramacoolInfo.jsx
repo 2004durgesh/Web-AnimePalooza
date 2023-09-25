@@ -2,14 +2,16 @@ import { useParams } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
-import { Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { AiOutlineClose } from "react-icons/ai";
 
-
+const serverOptions = ["asianload", "mixdrop", "streamtape", "streamsb"];
 const DramacoolInfo = () => {
     const [data, setData] = useState({});
     const [episodes, setEpisodes] = useState([]);
     const [otherNames, setOtherNames] = useState([]);
     const isMobile = useMediaQuery({ maxWidth: 767 });
+    const [selectedServer, setSelectedServer] = useState("");
     const { provider, providerHeader, id } = useParams()
     console.log(provider, providerHeader, id)
     const url = `https://consumet-api-pied.vercel.app/movies/${provider}/info?id=${providerHeader}/${id}`;
@@ -30,8 +32,8 @@ const DramacoolInfo = () => {
     useEffect(() => {
         fetchData();
     }, []);
-  return (
-    <>
+    return (
+        <>
             <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
                 <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
                     style={{
@@ -44,6 +46,32 @@ const DramacoolInfo = () => {
                         Othername(s): {otherNames.map((name, index) => (
                             <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{name}</span>
                         ))}
+                    </div>
+                    <div className="flex items-center">
+                        {/* Server options */}
+                        <label className="text-gray-200 md:text-gray-400 font-pro-bold font-semibold">
+                            Choose Server:
+                        </label>
+                        <select
+                            className="border-b-2 border-white text-white py-2 px-3 focus:outline-none focus:border-pro-red transition-all duration-300 w-auto ml-2 bg-black rounded-md capitalize"
+                            value={selectedServer}
+                            onChange={(e) => {
+                                setSelectedServer(e.target.value);
+                                console.log("Selected Server:", e.target.value);
+                            }}
+                        >
+                            <option value="">Select a server</option>
+                            {serverOptions.map((option) => (
+                                <option key={option} value={option} className="bg-gray-800 text-white">
+                                    {option}
+                                </option>
+                            ))}
+                        </select>
+                        <AiOutlineClose
+                            className={`h-6 w-6 text-pro-red cursor-pointer transform ${selectedServer ? "rotate-0" : "rotate-180"
+                                } transition-transform duration-300 ml-2`}
+                            onClick={() => setSelectedServer("")}
+                        />
                     </div>
                 </div>
                 <div
@@ -61,7 +89,7 @@ const DramacoolInfo = () => {
                         {episodes.length} Episodes
                     </h1>
                     {episodes.map((element) => (
-                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.episode}`} key={element.id}>
+                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.episode}/${selectedServer || "asianload"}`} key={element.id}>
                             <div className="flex flex-col hover:bg-gray-800 border-b-2 border-gray-800 rounded-lg p-4 my-2 transition duration-300 ease-in-out hover:scale-105">
                                 <span className="text-white text-lg font-pro-regular">Episode {element.episode}</span>
                                 <span className="text-xs text-[#D3D3D3]">Episode {element.releaseDate}</span>
@@ -71,7 +99,7 @@ const DramacoolInfo = () => {
                 </div>
             </section>
         </>
-  )
+    )
 }
 
 export default DramacoolInfo

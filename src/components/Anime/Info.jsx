@@ -52,7 +52,7 @@ const Info = () => {
                         </span>
                         :
                         <span className="flex flex-row items-center text-gray-400 gap-4">
-                            <RiCheckDoubleFill color="gray" size={20} />
+                            <RiCheckDoubleFill color="gray" size={20} />Completed
                         </span>}
                     <div className=" text-gray-200 md:text-gray-400 my-2 font-pro-medium">
                         Othername(s): {otherName.map((genre, index) => (

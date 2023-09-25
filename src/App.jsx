@@ -36,7 +36,7 @@ function App() {
           <Route path="/movies/:provider/info/:providerHeader/:id" element={<MoviesInfo/>} /> {/* here type can be movie or tv for flixhq and drama-detail for dramacool */}
           {/* Route for movie search results */}
           <Route path="/movies/:provider/search/:query" element={<SearchResults type="movies"/>} />
-          <Route path="/movies/:provider/watch/:episodeId/:providerHeader/:mediaId/:title/:episodeNumber" element={<VideoStreaming type="movies" />} />
+          <Route path="/movies/:provider/watch/:episodeId/:providerHeader/:mediaId/:title/:episodeNumber/:server" element={<VideoStreaming type="movies" />} />
           <Route path="/news" element={<News />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

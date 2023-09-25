@@ -6,10 +6,12 @@ import SearchBar from "../SearchBar";
 const Movies = () => {
   const { provider } = useParams()
   return (<>
-    <SearchBar placeholder="Search for movies, TV shows, and more" type="movies" provider={provider}/>
-    <Trending type={'movies'} provider={provider} typeOfContent={'trending'}/>
-    <Divider />
-    <Recent type={'movies'} provider={provider} typeOfContent={'recent-movies'}/>
+    <SearchBar placeholder="Search for movies, TV shows, and more" type="movies" provider={provider} />
+    {provider === 'flixhq' ?
+      <><Trending type={'movies'} provider={provider} typeOfContent={'trending'} />
+        <Divider />
+        <Recent type={'movies'} provider={provider} typeOfContent={'recent-movies'} /></>
+      : null}
   </>
   )
 }
