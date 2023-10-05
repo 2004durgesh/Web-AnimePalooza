@@ -12,11 +12,16 @@ import AnimeInfo from "./components/Anime/Info";
 import MoviesInfo from "./components/Movies/MoviesInfo";
 import VideoStreaming from "./components/Pages/VideoStreaming.jsx";
 import SearchResults from "./components/Pages/SearchResults";
-import Providers from "./components/Movies/Providers";
+import MovieProviders from "./components/Movies/MovieProviders";
+import MangaProviders from "./components/Manga/MangaProviders";
+import MangaSearchResults from "./components/Manga/MangaSearchResults";
+import MangaInfo from "./components/Manga/MangaInfo";
+import MangaRead from "./components/Pages/MangaRead";
+import NewsInfo from "./components/News/NewsInfo";
 
 function App() {
   const location = useLocation();
-  const showNavbarRoutes = ['/', '/anime', '/manga', '/movies','/movies/dramacool','/movies/flixhq', '/news'];
+  const showNavbarRoutes = ['/', '/anime', '/manga','/manga/mangadex','/manga/mangareader', '/movies','/movies/dramacool','/movies/flixhq', '/news'];
 
   return (
     <>
@@ -25,19 +30,27 @@ function App() {
         {(showNavbarRoutes.includes(location.pathname)) && <Navbar />}
         <Routes>
           <Route exact path="/" element={<Home />} />
+
           <Route path="/anime" element={<Anime />} />
           <Route path="/anime/info/:id" element={<AnimeInfo />} />
-          {/* Route for anime search results */}
           <Route path="/anime/:provider/search/:query" element={<SearchResults type="anime"/>} />
           <Route path="/anime/:provider/watch/:episodeId/:title/:episodeNumber" element={<VideoStreaming type="anime"/>} />
-          <Route path="/manga" element={<Manga />} />
-          <Route path="/movies" element={<Providers/>} />
+
+          <Route path="/manga" element={<MangaProviders />} />
+          <Route path="/manga/:provider" element={<Manga />} />
+          <Route path="/manga/:provider/search/:query" element={<MangaSearchResults/>} />
+          <Route path="/manga/:provider/info/:id" element={<MangaInfo/>} />
+          <Route path="/manga/:provider/read/:chapterId/:title/:chapterNumber" element={<MangaRead/>} />
+
+
+          <Route path="/movies" element={<MovieProviders/>} />
           <Route path="/movies/:provider" element={<Movies/>} />
           <Route path="/movies/:provider/info/:providerHeader/:id" element={<MoviesInfo/>} /> {/* here type can be movie or tv for flixhq and drama-detail for dramacool */}
-          {/* Route for movie search results */}
           <Route path="/movies/:provider/search/:query" element={<SearchResults type="movies"/>} />
           <Route path="/movies/:provider/watch/:episodeId/:providerHeader/:mediaId/:title/:episodeNumber/:server" element={<VideoStreaming type="movies" />} />
+
           <Route path="/news" element={<News />} />
+          <Route path="/news/info/:date/:id/:newsNumber" element={<NewsInfo />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

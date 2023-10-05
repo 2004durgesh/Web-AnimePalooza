@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import Confused from "/assets/images/confused.gif";
 import Loading from "/assets/images/loading.gif";
 import lozad from 'lozad'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Trending = ({ type, provider, typeOfContent }) => {
   const observer = lozad(); // Lazy loads elements with default selector as '.lozad'
@@ -20,6 +20,7 @@ const Trending = ({ type, provider, typeOfContent }) => {
   const currentPathname = location.pathname;
 
   const url = `https://consumet-api-pied.vercel.app/${type}/${provider}/${typeOfContent}`;
+  console.log(url)
   const fetchData = async (currentPage) => {
     try {
       const { data } = await axios.get(url, { params: { page: currentPage } });
@@ -53,24 +54,30 @@ const Trending = ({ type, provider, typeOfContent }) => {
 
   return (
     <>
-      {type === 'anime' ? <Helmet>
-        <title>AnimePalooza - Trending Anime Episodes | Watch Anime Online</title>
-        <meta
-          name="description"
-          content="Discover the hottest anime and trending shows on AnimePalooza. Explore a collection of popular anime series and movies that are capturing the hearts of fans. Join the anime hype today!"
-        />
-      </Helmet> :
-        <Helmet>
-          <title>AnimePalooza - Trending Movies and TV-Shows Episodes | Watch Movies-TV-Shows Online</title>
-          <meta
-            name="description"
-            content="Explore the hottest trending movies and TV shows on AnimePalooza. Stay up to date with the latest buzz in the world of entertainment. Join our community and discover what's currently popular!"
-          />
-        </Helmet>}
+      <Helmet>
+        {type === 'anime' ? (
+          <>
+            <title>AnimePalooza - Trending Anime Episodes | Watch Anime Online</title>
+            <meta
+              name="description"
+              content="Discover the hottest anime and trending shows on AnimePalooza. Explore a collection of popular anime series and movies that are capturing the hearts of fans. Join the anime hype today!"
+            />
+          </>
+        ) : (
+          <>
+            <title>AnimePalooza - Trending Movies and TV-Shows Episodes | Watch Movies-TV-Shows Online</title>
+            <meta
+              name="description"
+              content="Explore the hottest trending movies and TV shows on AnimePalooza. Stay up to date with the latest buzz in the world of entertainment. Join our community and discover what's currently popular!"
+            />
+          </>
+        )}
+      </Helmet>
+
       <section>
         {isloading ?
           <div className="flex flex-col justify-center items-center">
-            <img src={type === 'anime' ? Loading : Confused} alt={type === 'anime' ? "Loading... gif, saitama getting hit by stone" : "Loading... gif, Kevin Hart confused"} className="lozad w-3/4 md:w-1/2 h-[303px]" loading="lazy" />
+            <img src={type === 'anime' ? Loading : Confused} alt={type === 'anime' ? "Loading... gif, saitama getting hit by stone" : "Loading... gif, Kevin Hart confused"} className="lozad w-3/4 md:w-1/2 h-[303px]" loading="eager" />
             <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
               {type === 'anime' ?
                 `Just like Saitama, we are taking hits to bring you the best anime!`

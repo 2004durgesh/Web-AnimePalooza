@@ -8,7 +8,7 @@ import { AiOutlineDownload, AiOutlineSetting } from "react-icons/ai"
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import { Link } from "react-router-dom/dist";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const VideoStreaming = ({ type }) => {
   const { provider, episodeId, providerHeader, mediaId, title, episodeNumber, server } = useParams()

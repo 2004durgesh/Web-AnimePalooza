@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import Loading from "/assets/images/loading.gif";
 import Confused from "/assets/images/confused.gif";
 import lozad from 'lozad'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Recent = ({ type, provider, typeOfContent }) => {
   const observer = lozad(); // lazy loads elements with default selector as '.lozad'
@@ -57,28 +57,28 @@ const Recent = ({ type, provider, typeOfContent }) => {
   };
 
   return (<>
-    {type === 'anime' ?
-      <Helmet>
-        <title>AnimePalooza - Latest Anime Episodes | Watch Anime Online</title>
-        <meta
-          name="description"
-          content="Stay up to date with the latest anime episodes on AnimePalooza. Explore a wide selection of new releases and enjoy your favorite anime online. Join the anime community today!"
-        />
-      </Helmet>
-      :
-      <Helmet>
-        <title>AnimePalooza - Latest Movies and TV-Shows Episodes | Watch Movies-TV-Shows Online</title>
-        <meta
-          name="description"
-          content="Discover a vast collection of movies and TV shows on AnimePalooza. Explore the latest releases and enjoy your favorite content online. Join our community of movie and TV show enthusiasts today!"
-        />
-      </Helmet>
-    }
+    <Helmet>
+      <title>
+        {type === 'anime'
+          ? "AnimePalooza - Latest Anime Episodes | Watch Anime Online"
+          : "AnimePalooza - Latest Movies and TV-Shows Episodes | Watch Movies-TV-Shows Online"
+        }
+      </title>
+      <meta
+        name="description"
+        content={
+          type === 'anime'
+            ? "Stay up to date with the latest anime episodes on AnimePalooza. Explore a wide selection of new releases and enjoy your favorite anime online. Join the anime community today!"
+            : "Discover a vast collection of movies and TV shows on AnimePalooza. Explore the latest releases and enjoy your favorite content online. Join our community of movie and TV show enthusiasts today!"
+        }
+      />
+    </Helmet>
+
     <section>
 
       {isLoading ?
         <div className="flex flex-col justify-center items-center">
-          <img src={type === 'anime' ? Loading : Confused} alt={type === 'anime' ? "Loading... gif, saitama getting hit by stone" : "Loading... gif, Kevin Hart confused"} className="lozad w-3/4 md:w-1/2 h-[303px]" loading="lazy" />
+          <img src={type === 'anime' ? Loading : Confused} alt={type === 'anime' ? "Loading... gif, saitama getting hit by stone" : "Loading... gif, Kevin Hart confused"} className="lozad w-3/4 md:w-1/2 h-[303px]" loading="eager" />
           <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
             {type === 'anime' ?
               `Just like Saitama, we are taking hits to bring you the best anime!`
@@ -124,13 +124,13 @@ const Recent = ({ type, provider, typeOfContent }) => {
                   <div className="absolute bottom-4 left-4 text-left">
                     <h1 className="text-lg font-semibold text-white">{result.title}</h1>
                     <Link to={`${currentPathname}/info/${result.id}`}>
-                    <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white capitalize">
-                          {type === 'anime' ?
-                            'View Anime \u2192'
-                            :
-                            'View Shows \u2192'
-                          }
-                        </button>
+                      <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white capitalize">
+                        {type === 'anime' ?
+                          'View Anime \u2192'
+                          :
+                          'View Shows \u2192'
+                        }
+                      </button>
                     </Link>
                   </div>
                 </div>

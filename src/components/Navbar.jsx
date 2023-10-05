@@ -17,23 +17,24 @@ const Navbar = () => {
   };
 
   // Array of navigation items
-  const listItems = ['anime', 'manga', 'movies', 'news'];
+  const listItems = ['home','anime', 'manga', 'movies', 'news'];
 
   return (
     <>
       {/* Navigation bar */}
       <nav className='flex items-center py-4 px-2 absolute top-0 w-full z-10'>
-        <h1 className='logo text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
-        tracking-wider select-none'>
-          AnimePalooza
-        </h1>
+        <Link to='/'>
+          <h1 className='logo text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
+          tracking-wider select-none'>
+            AnimePalooza
+          </h1>
+        </Link>
 
         {/* Desktop navigation menu */}
         <ul className='ml-auto space-x-1 md:space-x-4 hidden sm:flex'>
           {listItems.map((item) => (
             <li className='font-pro-medium font-semibold text-accent text-lg text-white capitalize pr-6' key={item}>
-              {/* {item === "anime" ? <Link to='/'>{item}</Link> : <Link to={`/${item}`}>{item}</Link>} */}
-              <Link to={`/${item}`}>{item}</Link>
+              {<Link to={item!=='home'?`/${item}`:`/`}>{item}</Link>}
             </li>
           ))}
         </ul>
@@ -54,7 +55,7 @@ const Navbar = () => {
             <ul className='bg-pro-red fixed top-0 right-[0%] h-[70vh] w-72 transition-all space-y-4 px-6 py-14 m-4 rounded-2xl z-10'>
               {listItems.map((item) => (
                 <li className='font-semibold text-accent text-lg text-white font-pro-medium capitalize cursor-pointer' key={item}>
-                  {<Link to={`/${item}`}>{item}</Link>}
+                  {<Link to={item!=='home'?`/${item}`:`/`} onClick={closeNav}>{item}</Link>}
                 </li>
               ))}
             </ul>

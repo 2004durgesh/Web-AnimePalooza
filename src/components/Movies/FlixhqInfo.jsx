@@ -5,7 +5,7 @@ import { AiOutlineClose, AiOutlineStar } from "react-icons/ai";
 import { FcCalendar, FcFilmReel, FcGlobe } from 'react-icons/fc'
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const serverOptions = ["mixdrop", "vidcloud", "upcloud"];
 const FlixhqInfo = () => {
@@ -40,7 +40,7 @@ const FlixhqInfo = () => {
                 <meta name="description" content={`Explore ${data.title}, a ${data.releaseDate} release. Learn more about this ${data.type} and its cast, episodes, and genres.`} />
             </Helmet>
             <section className="flex flex-col-reverse md:flex-row items-center justify-center mx-auto my-4 max-w-5xl">
-                <div className="md:w-1/2 px-3 bg-[length:200px_100px]"
+                <div className="md:w-1/2 px-3"
                     style={{
                         backgroundSize: "contain",
                         background: isMobile ? `linear-gradient(to top, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 1) 100%),url(${data.cover}) no-repeat top` : 'none',

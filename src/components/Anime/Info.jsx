@@ -6,7 +6,7 @@ import { RiCheckDoubleFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import Episodes from "./Episodes";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Info = () => {
     const [data, setData] = useState({});
@@ -51,14 +51,18 @@ const Info = () => {
                         <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] text-gray-200 md:text-gray-400 border-gray-400 px-3 py-1 text-[10px] font-pro-medium font-semibold tracking-wider">{genre}</span>
                     ))}
                     <p className="font-pro-medium font-semibold text-gray-200 md:text-gray-400 my-2 text-xs sm:text-sm">{data.description}</p>
-                    {data.status === "Ongoing" ?
-                        <span className="flex flex-row items-center font-pro-medium text-gray-200 md:text-gray-400 gap-4">
-                            <AiOutlineClockCircle color="gray" size={20} />Ongoing
-                        </span>
-                        :
-                        <span className="flex flex-row items-center text-gray-400 gap-4">
-                            <RiCheckDoubleFill color="gray" size={20} />Completed
-                        </span>}
+                    <span className="flex flex-row items-center font-pro-medium text-gray-200 md:text-gray-400 gap-4">
+                        {data.status === "Ongoing" ? (
+                            <>
+                                <AiOutlineClockCircle color="gray" size={20} />Ongoing
+                            </>
+                        ) : (
+                            <>
+                                <RiCheckDoubleFill color="gray" size={20} />Completed
+                            </>
+                        )}
+                    </span>
+
                     <div className=" text-gray-200 md:text-gray-400 my-2 font-pro-medium">
                         Othername(s): {otherName.map((genre, index) => (
                             <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{genre}</span>

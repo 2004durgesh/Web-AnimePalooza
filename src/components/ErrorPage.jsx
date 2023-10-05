@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
 import lozad from 'lozad'
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const ErrorPage = () => {
     const observer = lozad(); // lazy loads elements with default selector as '.lozad'

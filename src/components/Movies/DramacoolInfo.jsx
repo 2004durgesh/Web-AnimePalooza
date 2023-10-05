@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
 import { AiOutlineClose } from "react-icons/ai";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const serverOptions = ["asianload", "mixdrop", "streamtape", "streamsb"];
 const DramacoolInfo = () => {
