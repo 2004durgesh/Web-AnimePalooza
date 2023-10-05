@@ -14,10 +14,9 @@ const Navbar = () => {
       {/* Navigation bar */}
       <nav className='flex items-center py-4 px-2 absolute top-0 w-full z-10'>
         {/* Background overlay for mobile menu */}
-        <div className='sm:hidden fixed inset-0 backdrop-filter backdrop-blur-md bg-opacity-40 z-[0]'></div>
 
         <Link to='/'>
-          <h1 className='logo relative text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
+          <h1 className='logo relative z-50 text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
           tracking-wider select-none'>
             AnimePalooza
           </h1>
@@ -34,12 +33,12 @@ const Navbar = () => {
         </ul>
 
         {/* Mobile menu icon */}
-        <div className='ml-auto block sm:hidden relative  mr-4 mt-4'>
+        <div className='ml-auto block sm:hidden relative z-50 mr-4 mt-4'>
           {nav ?
             <CgClose
               size={40}
               color='white'
-              className='relative z-50'
+              className='relative'
               onClick={() => setNav(prevValue => !prevValue)}
             /> :
             <CgMenu
@@ -50,6 +49,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile navigation menu */}
+        <div className={nav?`fixed inset-0 backdrop-filter backdrop-blur-md bg-opacity-40 z-[0]`:null}></div>
         <ul className={nav ? "fixed top-0 right-0 h-[70vh] w-72 mr-4 mt-4 bg-pro-red rounded-2xl space-y-4 px-6 py-14 m-4 md:hidden ease-in duration-200" : "fixed top-0 -right-full ease-out duration-200 "}>
           {listItems.map((item) => (
             <li className='font-semibold text-accent text-lg text-white font-pro-medium capitalize cursor-pointer' key={item}>
