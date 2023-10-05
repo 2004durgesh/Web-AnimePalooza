@@ -40,7 +40,7 @@ const News = () => {
           <div className="flex flex-col justify-center items-center">
             <img src={Loading} alt="Loading... gif, saitama getting hit by stone" className="lozad w-3/4 md:w-1/2 h-[303px]" loading="eager" />
             <p className="text-pro-red font-pro-bold font-semibold text-2xl text-center">
-              Just like Saitama, we are taking hits to bring you the best anime!
+              Just like Saitama, we are taking hits to bring you the best news!
             </p>
           </div>
         ) : (
