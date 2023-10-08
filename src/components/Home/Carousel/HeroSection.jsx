@@ -19,10 +19,10 @@ const HeroSection = () => {
                 <Swiper
                     centeredSlides={true}
                     loop={true}
-                    autoplay={{
-                        delay: 10000,
-                        disableOnInteraction: true,
-                    }}
+                    // autoplay={{
+                    //     delay: 10000,
+                    //     disableOnInteraction: true,
+                    // }}
                     pagination={{
                         dynamicBullets: true,
                     }}
