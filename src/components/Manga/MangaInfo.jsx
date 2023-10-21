@@ -11,6 +11,7 @@ import Recommendations from "./Recommendations";
 import Relations from "./Relations";
 import Characters from "./Characters";
 import Chapters from "./Chapters";
+import FavoritesButton from "../FavoritesButton";
 const MangaInfo = () => {
   const { provider, id } = useParams()
   const [data, setData] = useState({})
@@ -23,27 +24,27 @@ const MangaInfo = () => {
   observer.observe();
 
   const url = `https://consumet-api-pied.vercel.app/meta/anilist-manga/info/${id}?provider=${provider}`
-  
-console.log(url)
+
+  console.log(url)
   // Fetch data when the component mounts
   useEffect(() => {
     // Function to fetch data
-  const fetchData = async () => {
-    try {
-      const { data } = await axios.get(url);
-      setData(data);
-      setRecommendations(data.recommendations);
-      setRelations(data.relations);
-      setCharacters(data.characters);
-      setChapters(data.chapters);
-      setIsLoading(false);
-      return data;
-    } catch (err) {
-      throw new Error(err.message);
-    }
-  };
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(url);
+        setData(data);
+        setRecommendations(data.recommendations);
+        setRelations(data.relations);
+        setCharacters(data.characters);
+        setChapters(data.chapters);
+        setIsLoading(false);
+        return data;
+      } catch (err) {
+        throw new Error(err.message);
+      }
+    };
 
-  fetchData()
+    fetchData()
   }, [url]);
   return (
     <>
@@ -93,7 +94,7 @@ console.log(url)
                         icon: <FcCalendar color="gray" size={20} />,
                         text: data.endDate.year
                           ? `EndDate ${data.endDate.year}/${data.endDate.month}/${data.endDate.day}`
-                          : "Not available since ongoing",
+                          : "Not available, since ongoing",
                       },
                       {
                         icon: <AiOutlineStar color="#FFD700" size={20} />,
@@ -113,9 +114,9 @@ console.log(url)
                     Othername(s):
                     <span className="mb-2 mx-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{data.title.romaji}</span>
                     <span className="mb-2 mx-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{data.title.native}</span>
-                  </div>
-                  <div className="">
-
+                    <div className="">
+                      <FavoritesButton type='manga' id={id} title={data.title.english} image={data.image} provider={provider} />
+                    </div>
                   </div>
                 </div>
                 <div

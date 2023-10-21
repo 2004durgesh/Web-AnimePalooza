@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
 import { AiOutlineClose } from "react-icons/ai";
 import { Helmet } from "react-helmet-async";
+import FavoritesButton from "../FavoritesButton";
 
 const serverOptions = ["asianload", "mixdrop", "streamtape", "streamsb"];
 const DramacoolInfo = () => {
@@ -50,6 +51,7 @@ const DramacoolInfo = () => {
                             <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{name}</span>
                         ))}
                     </div>
+                    <FavoritesButton type="movies" id={data.id} title={data.title} image={data.image} provider={provider} />
                     <div className="flex items-center">
                         {/* Server options */}
                         <label className="text-gray-200 md:text-gray-400 font-pro-bold font-semibold">

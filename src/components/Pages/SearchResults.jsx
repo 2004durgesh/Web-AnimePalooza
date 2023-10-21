@@ -110,7 +110,7 @@ const SearchResults = ({ type }) => {
                                             <div className="absolute bottom-4 left-4 text-left">
                                                 <h1 className="text-lg font-semibold text-white">{result.title}</h1>
                                                 {type === 'anime' ?
-                                                    <Link to={`/anime/info/${result.id}`}>
+                                                    <Link to={`/anime/${provider}/info/${result.id}`}>
                                                         <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white capitalize">
                                                             View Anime &rarr;
                                                         </button>

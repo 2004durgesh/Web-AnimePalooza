@@ -7,7 +7,7 @@ const Navbar = () => {
   const [nav, setNav] = useState(false);
 
   // Array of navigation items
-  const listItems = ['home', 'anime', 'manga', 'movies', 'news'];
+  const listItems = ['home', 'anime', 'manga', 'movies', 'news','favorites'];
 
   return (
     <>
@@ -16,8 +16,7 @@ const Navbar = () => {
         {/* Background overlay for mobile menu */}
 
         <Link to='/'>
-          <h1 className='logo relative z-50 text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none
-          tracking-wider select-none'>
+          <h1 className='logo relative z-50 text-pro-red text-secondary font-extrabold lg:text-5xl md:text-4xl text-3xl pointer-events-none tracking-wider select-none pl-2 mr-4'>
             AnimePalooza
           </h1>
         </Link>

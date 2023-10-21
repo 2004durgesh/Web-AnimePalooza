@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Dramacool from "/assets/images/dramacool.jpeg";
 import Flixhq from "/assets/images/flixhq.png";
 import { useLocation } from 'react-router-dom';
-import ProviderCard from './MovieProviderCard';
+import ProviderCard from '../ProviderCard';
 
 const MovieProviders = () => {
   const location = useLocation();

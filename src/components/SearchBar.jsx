@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useLocation } from 'react-router-dom';
 
-const SearchBar = ({ placeholder,type,provider }) => {
+const SearchBar = ({ placeholder,type}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation()
   const currentPathName = location.pathname
@@ -15,7 +15,7 @@ const SearchBar = ({ placeholder,type,provider }) => {
     else {
       if(type==='anime'){
         // eslint-disable-next-line no-undef
-        navigation.navigate(`${currentPathName}/${provider}/search/${searchQuery}`);
+        navigation.navigate(`${currentPathName}/search/${searchQuery}`);
       }
       else{
         // eslint-disable-next-line no-undef

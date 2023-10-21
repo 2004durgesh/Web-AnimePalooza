@@ -6,6 +6,7 @@ import { FcCalendar, FcFilmReel, FcGlobe } from 'react-icons/fc'
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet-async";
+import FavoritesButton from "../FavoritesButton";
 
 const serverOptions = ["mixdrop", "vidcloud", "upcloud"];
 const FlixhqInfo = () => {
@@ -68,6 +69,7 @@ const FlixhqInfo = () => {
                             <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{genre}</span>
                         ))}
                     </div>
+                    <FavoritesButton type='movies' id={data.id} title={data.title} image={data.cover} provider={provider} />
                     <div className="flex items-center">
                         {/* Server options */}
                         <label className="text-gray-200 md:text-gray-400 font-pro-bold font-semibold">

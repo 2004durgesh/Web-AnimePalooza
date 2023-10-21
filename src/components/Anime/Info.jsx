@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import Episodes from "./Episodes";
 import { Helmet } from "react-helmet-async";
+import FavoritesButton from '../FavoritesButton'
+
 
 const Info = () => {
     const [data, setData] = useState({});
@@ -14,9 +16,9 @@ const Info = () => {
     const [episodes, setEpisodes] = useState([]);
     const [otherName, setOtherName] = useState([]);
     const isMobile = useMediaQuery({ maxWidth: 767 });
-    const { id } = useParams();
+    const { provider,id } = useParams();
 
-    const url = `https://consumet-api-pied.vercel.app/anime/gogoanime/info/${id}`;
+    const url = `https://consumet-api-pied.vercel.app/anime/${provider}/info/${id}`;
 
     const fetchData = async () => {
         try {
@@ -68,6 +70,7 @@ const Info = () => {
                             <span key={index} className="mb-2 mr-2 inline-block rounded-full border-[2px] border-gray-400 px-3 py-1 text-[10px] font-semibold tracking-wider">{genre}</span>
                         ))}
                     </div>
+                    <FavoritesButton type='anime' id={id} title={data.title} image={data.image} provider={provider}/>
                 </div>
                 <div
                     className="h-96 w-96 bg-no-repeat float-right hidden md:block overflow-hidden"

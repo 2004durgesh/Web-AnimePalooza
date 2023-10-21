@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import Mangadex from "/assets/images/mangadex.jpg";
 import Mangareader from "/assets/images/mangareader.jpg";
 import { useLocation } from 'react-router-dom';
-import ProviderCard from './MangaProviderCard';
+import ProviderCard from '../ProviderCard';
 
 const MangaProviders = () => {
   const location = useLocation();
