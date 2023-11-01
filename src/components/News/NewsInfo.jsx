@@ -16,11 +16,13 @@ const NewsInfo = () => {
     observer.observe();
 
     const newsId = `${date}/${id}/${newsNumber}`;
-    const url = `https://consumet-api-pied.vercel.app/news/ann/info?id=${newsId}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/news/ann/info?id=${newsId}`;
 
     const fetchData = async () => {
         try {
-            const { data } = await axios.get(url);
+            const { data } = await axios.get(url,{
+                headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+            });
             setData(data);
             setIsLoading(false);
         } catch (err) {

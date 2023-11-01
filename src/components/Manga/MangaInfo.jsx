@@ -23,7 +23,7 @@ const MangaInfo = () => {
   const observer = lozad(); // lazy loads elements with default selector as '.lozad'
   observer.observe();
 
-  const url = `https://consumet-api-pied.vercel.app/meta/anilist-manga/info/${id}?provider=${provider}`
+  const url = `${import.meta.env.VITE_API_BASE_URL}/meta/anilist-manga/info/${id}?provider=${provider}`
 
   console.log(url)
   // Fetch data when the component mounts
@@ -31,7 +31,9 @@ const MangaInfo = () => {
     // Function to fetch data
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url,{
+          headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+        });
         setData(data);
         setRecommendations(data.recommendations);
         setRelations(data.relations);

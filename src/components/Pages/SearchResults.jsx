@@ -18,11 +18,13 @@ const SearchResults = ({ type }) => {
     let [currentPage, setCurrentPage] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
-    const url = `https://consumet-api-pied.vercel.app/${type}/${provider}/${query}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/${query}`;
     // Function to fetch data
     const fetchData = async (currentPage) => {
         try {
-            const { data } = await axios.get(url, { params: { page: currentPage } });
+            const { data } = await axios.get(url, { 
+                params: { page: currentPage },
+                headers:{'x-api-key':import.meta.env.VITE_API_KEY} });
             setData(data.results);
             setNextPage(data.hasNextPage);
             setCurrentPage(Number(data.currentPage));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import lozad from "lozad";
@@ -9,7 +9,6 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Helmet } from "react-helmet-async";
 import Loading from "/assets/images/loading.gif";
-import Confused from "/assets/images/confused.gif";
 
 const MangaRead = () => {
     const { chapterId, provider,title,chapterNumber } = useParams();
@@ -19,11 +18,13 @@ const MangaRead = () => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const url = `https://api.consumet.org/meta/anilist-manga/read?chapterId=${chapterId}&provider=${provider}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/meta/anilist-manga/read?chapterId=${chapterId}&provider=${provider}`;
 
     const fetchData = async () => {
         try {
-            const { data } = await axios.get(url);
+            const { data } = await axios.get(url,{
+                headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+            });
             setData(data);
             setIsLoading(false);
             return data;

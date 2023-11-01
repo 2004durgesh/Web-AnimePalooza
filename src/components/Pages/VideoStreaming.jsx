@@ -19,13 +19,15 @@ const VideoStreaming = ({ type }) => {
   const [visible, setVisible] = useState(false);
   let url
   if (type === 'movies') {
-    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}&server=${server}`;
+    url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}&server=${server}`;
   } else {
-    url = `https://consumet-api-pied.vercel.app/${type}/${provider}/watch/${episodeId}`;
+    url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch/${episodeId}`;
   }
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url,{
+        headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+      });
       if (provider === "gogoanime") setSourcesUrl(data.sources[3].url);
       else if (provider === "dramacool" ||provider === "flixhq") setSourcesUrl(data.sources[0].url);
       setDownload(data.download)
@@ -94,9 +96,7 @@ const VideoStreaming = ({ type }) => {
               <div>
                 {sources.map((element) => {
                   return (
-                    <>
-                      <div className="font-pro-bold font-semibold cursor-pointer text-pro-red px-2 py-1 capitalize" onClick={() => { setSourcesUrl(element.url) }}>{element.quality}</div>
-                    </>
+                      <div key={element.url} className="font-pro-bold font-semibold cursor-pointer text-pro-red px-2 py-1 capitalize" onClick={() => { setSourcesUrl(element.url) }}>{element.quality}</div>
                   )
                 })}
               </div>

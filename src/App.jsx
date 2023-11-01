@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
+
 // Import your components
 import Anime from "./components/Anime/Anime";
 import Navbar from "./components/Navbar";
@@ -37,7 +38,7 @@ function App() {
           <Route path="/anime/:provider" element={<Anime />} />
           <Route path="/anime/:provider/info/:id" element={<AnimeInfo />} />
           <Route path="/anime/:provider/search/:query" element={<SearchResults type="anime" />} />
-          <Route path="/anime/:provider/watch/:episodeId/:title/:episodeNumber" element={<VideoStreaming type="anime" />} />
+          <Route path="/anime/:provider/watch/:episodeId/:title" element={<VideoStreaming type="anime" />} />
 
           <Route path="/manga" element={<MangaProviders />} />
           <Route path="/manga/:provider" element={<Manga />} />

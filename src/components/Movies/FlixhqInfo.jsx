@@ -17,11 +17,13 @@ const FlixhqInfo = () => {
     const [selectedServer, setSelectedServer] = useState("");
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const { provider, providerHeader, id } = useParams()
-    const url = `https://consumet-api-pied.vercel.app/movies/${provider}/info?id=${providerHeader}/${id}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/movies/${provider}/info?id=${providerHeader}/${id}`;
 
     const fetchData = async () => {
         try {
-            const { data } = await axios.get(url);
+            const { data } = await axios.get(url,{
+                headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+            });
             setData(data);
             setGenres(data.genres);
             setEpisodes(data.episodes);

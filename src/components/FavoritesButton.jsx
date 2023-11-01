@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import {setFavoriteShowsLocalStorage} from './redux/actions/FavoritesActions'
 const FavoritesButton = ({ type, id, title, image,provider }) => {
+    const [isFavorite, setIsFavorite] = useState(false)
+    const dispatch = useDispatch();
     const favoritesInfo = {
         id: id,
         title: title,
@@ -14,9 +16,7 @@ const FavoritesButton = ({ type, id, title, image,provider }) => {
         provider:provider,
     };
 
-    const [isFavorite, setIsFavorite] = useState(false)
     const favoriteShows = JSON.parse(localStorage.getItem('favoriteShows')) || [];
-    const dispatch = useDispatch();
     useEffect(() => {
         setIsFavorite(favoriteShows.some(favorite => favorite.id === id));
     }, [id, favoriteShows]);

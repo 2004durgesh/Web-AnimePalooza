@@ -19,11 +19,13 @@ const Recent = ({ type, provider, typeOfContent }) => {
   const location = useLocation();
   const currentPathname = location.pathname;
 
-  const url = `https://consumet-api-pied.vercel.app/${type}/${provider}/${typeOfContent}`;
-
+  const url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/${typeOfContent}`;
   const fetchData = async (currentPage) => {
     try {
-      const { data } = await axios.get(url, { params: { page: currentPage } });
+      const { data } = await axios.get(url, { 
+        params: { page: currentPage }, 
+        headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+      });
       if (provider === "flixhq") {
         setData(data)
       } else {

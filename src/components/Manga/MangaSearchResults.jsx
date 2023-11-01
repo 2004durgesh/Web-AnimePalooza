@@ -21,12 +21,14 @@ const MangaSearchResults = () => {
     const [isLoading, setIsLoading] = useState(true);
     const isMobile = useMediaQuery({ maxWidth: 767 });
 
-    const url = `https://consumet-api-pied.vercel.app/meta/anilist-manga/${query}`;
+    const url = `${import.meta.env.VITE_API_BASE_URL}/meta/anilist-manga/${query}`;
 
     // Function to fetch data
     const fetchData = async () => {
         try {
-            const { data } = await axios.get(url);
+            const { data } = await axios.get(url,{
+                headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+            });
             setData(data.results);
             setNextPage(false);
             setCurrentPage(Number(data.currentPage));

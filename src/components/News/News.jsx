@@ -10,13 +10,15 @@ const News = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const currentPathname = location.pathname;
-  const url = `https://consumet-api-pied.vercel.app/news/ann/recent-feeds`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/news/ann/recent-feeds`;
   const observer = lozad(); // lazy loads elements with default selector as '.lozad'
   observer.observe();
 
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(url);
+      const { data } = await axios.get(url,{
+        headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+      });
       setData(data);
       setIsLoading(false);
       return data;
