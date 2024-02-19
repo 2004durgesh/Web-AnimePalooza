@@ -25,7 +25,6 @@ const MangaInfo = () => {
 
   const url = `${import.meta.env.VITE_API_BASE_URL}/meta/anilist-manga/info/${id}?provider=${provider}`
 
-  console.log(url)
   // Fetch data when the component mounts
   useEffect(() => {
     // Function to fetch data

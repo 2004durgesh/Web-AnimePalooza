@@ -20,16 +20,19 @@ const VideoStreaming = ({ type }) => {
   let url
   if (type === 'movies') {
     url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}&server=${server}`;
-  } else {
+  }
+  else {
     url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch/${episodeId}`;
   }
+
+  console.log(url)
   const fetchData = async () => {
     try {
-      const { data } = await axios.get(url,{
-        headers:{'x-api-key':import.meta.env.VITE_API_KEY}
+      const { data } = await axios.get(url, {
+        headers: { 'x-api-key': import.meta.env.VITE_API_KEY }
       });
-      if (provider === "gogoanime") setSourcesUrl(data.sources[3].url);
-      else if (provider === "dramacool" ||provider === "flixhq") setSourcesUrl(data.sources[0].url);
+      if (provider === "gogoanime") { setSourcesUrl(data.sources[3].url); }
+      if (provider === "dramacool" || provider === "flixhq") { setSourcesUrl(data.sources[0].url); }
       setDownload(data.download)
       setSources(data.sources)
       return data;
@@ -37,74 +40,75 @@ const VideoStreaming = ({ type }) => {
       throw new Error(err.message);
     }
   };
+  // console.log(fetchData(),sourcesUrl)
 
-  
-    const show = () => {
-      setVisible(true);
-    };
 
-    const hide = () => {
-      setVisible(false);
-    };
+  const show = () => {
+    setVisible(true);
+  };
 
-    useEffect(() => {
-      fetchData();
-    }, []);
+  const hide = () => {
+    setVisible(false);
+  };
 
-    return (
-      <>
-        <Helmet>
-          <title>{`Watch ${title} Online | AnimePalooza Streaming | ${type} Episode ${episodeNumber} of ${title}`}</title>
-          <meta name="description" content={`Stream ${title} on AnimePalooza - Watch ${type} episode ${episodeNumber} of ${title}. Enjoy high-quality streaming and download options. Explore more anime episodes and movies today!`} />
-        </Helmet>
-        <section className="relative">
-          <div className="absolute inset-0">
-            <ReactPlayer
-              url={sourcesUrl}
-              controls={true}
-              volume={1}
-              playing={true}
-              width="100%"
-              height={isMobile ? "50vh" : "100vh"}
-              config={{
-                hls: {
-                  // Additional HLS configuration options go here (optional)
-                },
-              }}
-            />
-          </div>
-          <div className="absolute top-0 right-0 flex flex-row my-10 space-x-5 md:space-x-10 mx-10">
-            {download ? <Link to={`${download}`} target="_blank">
-              <AiOutlineDownload className="cursor-pointer" color="white" size={isMobile ? 20 : 30} />
-            </Link> : null}
-            <AiOutlineSetting className="cursor-pointer" color="white" size={isMobile ? 20 : 30} onClick={show} />
-          </div>
-          <div>
-            <Rodal
-              onClose={hide}
-              visible={visible}
-              animation="rotate"
-              closeOnEsc={true}
-              showCloseButton={false}
-              customStyles={{
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                borderRadius: '8px',
-                padding: '20px',
-                maxWidth: '80%',
-              }}
-            >
-              <div>
-                {sources.map((element) => {
-                  return (
-                      <div key={element.url} className="font-pro-bold font-semibold cursor-pointer text-pro-red px-2 py-1 capitalize" onClick={() => { setSourcesUrl(element.url) }}>{element.quality}</div>
-                  )
-                })}
-              </div>
-            </Rodal>
-          </div>
-        </section>
-      </>
-    );
-              };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  export default VideoStreaming;
+  return (
+    <>
+      <Helmet>
+        <title>{`Watch ${title} Online | AnimePalooza Streaming | ${type} Episode ${episodeNumber} of ${title}`}</title>
+        <meta name="description" content={`Stream ${title} on AnimePalooza - Watch ${type} episode ${episodeNumber} of ${title}. Enjoy high-quality streaming and download options. Explore more anime episodes and movies today!`} />
+      </Helmet>
+      <section className="relative">
+        <div className="absolute inset-0">
+          <ReactPlayer
+            url={sourcesUrl}
+            controls={true}
+            volume={1}
+            playing={true}
+            width="100%"
+            height={isMobile ? "50vh" : "100vh"}
+            config={{
+              hls: {
+                // Additional HLS configuration options go here (optional)
+              },
+            }}
+          />
+        </div>
+        <div className="absolute top-0 right-0 flex flex-row my-10 space-x-5 md:space-x-10 mx-10">
+          {download ? <Link to={`${download}`} target="_blank">
+            <AiOutlineDownload className="cursor-pointer" color="white" size={isMobile ? 20 : 30} />
+          </Link> : null}
+          <AiOutlineSetting className="cursor-pointer" color="white" size={isMobile ? 20 : 30} onClick={show} />
+        </div>
+        <div>
+          <Rodal
+            onClose={hide}
+            visible={visible}
+            animation="rotate"
+            closeOnEsc={true}
+            showCloseButton={false}
+            customStyles={{
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
+              borderRadius: '8px',
+              padding: '20px',
+              maxWidth: '80%',
+            }}
+          >
+            <div>
+              {sources.map((element) => {
+                return (
+                  <div key={element.url} className="font-pro-bold font-semibold cursor-pointer text-pro-red px-2 py-1 capitalize" onClick={() => { setSourcesUrl(element.url) }}>{element.quality}</div>
+                )
+              })}
+            </div>
+          </Rodal>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default VideoStreaming;

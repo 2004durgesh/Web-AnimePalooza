@@ -116,7 +116,7 @@ const FlixhqInfo = () => {
                         {episodes.length} Episodes
                     </h1>
                     {episodes.map((element) => (
-                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}/${selectedServer || "upcloud"}`} key={element.id}>
+                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}/${selectedServer || "vidcloud"}`} key={element.id}>
                             <div className="flex flex-col hover:bg-gray-800 border-b-2 border-gray-800 rounded-lg p-4 my-2 transition duration-300 ease-in-out hover:scale-105">
                                 <span className="text-white text-lg font-pro-regular">{element.title}</span>
                                 {data.type === 'TV Series' ? <span className='text-xs text-[#D3D3D3]'>Episode {element.number} Season{element.season}</span> : null}

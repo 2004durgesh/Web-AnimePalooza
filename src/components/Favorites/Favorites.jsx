@@ -9,7 +9,6 @@ const Favorites = () => {
   useEffect(() => {
     const favoriteShows = localStorage.getItem("favoriteShows");
     setData(JSON.parse(favoriteShows))
-    console.log(data,favoriteShows)
   }, [])
   const observer = lozad(); // Lazy loads elements with default selector as '.lozad'
   observer.observe();

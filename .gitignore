@@ -12,8 +12,6 @@ dist
 dist-ssr
 *.local
 .env
-help.txt
-help1.txt
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

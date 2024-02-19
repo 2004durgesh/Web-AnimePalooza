@@ -20,7 +20,6 @@ const Trending = ({ type, provider, typeOfContent }) => {
   const currentPathname = location.pathname;
 
   const url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/${typeOfContent}`;
-  console.log(url)
   const fetchData = async (currentPage) => {
     try {
       const { data } = await axios.get(url, { 
