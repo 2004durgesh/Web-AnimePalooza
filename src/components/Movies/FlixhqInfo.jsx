@@ -1,20 +1,18 @@
 import { useParams } from "react-router-dom"
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineStar } from "react-icons/ai";
+import {  AiOutlineStar } from "react-icons/ai";
 import { FcCalendar, FcFilmReel, FcGlobe } from 'react-icons/fc'
 import { useMediaQuery } from 'react-responsive';
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet-async";
 import FavoritesButton from "../FavoritesButton";
 
-const serverOptions = ["mixdrop", "vidcloud", "upcloud"];
 const FlixhqInfo = () => {
     const [data, setData] = useState({});
     const [genres, setGenres] = useState([]);
     const [episodes, setEpisodes] = useState([]);
     const [casts, setCasts] = useState([]);
-    const [selectedServer, setSelectedServer] = useState("");
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const { provider, providerHeader, id } = useParams()
     const url = `${import.meta.env.VITE_API_BASE_URL}/movies/${provider}/info?id=${providerHeader}/${id}`;
@@ -72,31 +70,7 @@ const FlixhqInfo = () => {
                         ))}
                     </div>
                     <FavoritesButton type='movies' id={data.id} title={data.title} image={data.cover} provider={provider} />
-                    <div className="flex items-center">
-                        {/* Server options */}
-                        <label className="text-gray-200 md:text-gray-400 font-pro-bold font-semibold">
-                            Choose Server:
-                        </label>
-                        <select
-                            className="border-b-2 border-white text-white py-2 px-3 focus:outline-none focus:border-pro-red transition-all duration-300 w-auto ml-2 bg-black rounded-md capitalize"
-                            value={selectedServer}
-                            onChange={(e) => {
-                                setSelectedServer(e.target.value);
-                            }}
-                        >
-                            <option value="">Select a server</option>
-                            {serverOptions.map((option) => (
-                                <option key={option} value={option} className="bg-gray-800 text-white">
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
-                        <AiOutlineClose
-                            className={`h-6 w-6 text-pro-red cursor-pointer transform ${selectedServer ? "rotate-0" : "rotate-180"
-                                } transition-transform duration-300 ml-2`}
-                            onClick={() => setSelectedServer("")}
-                        />
-                    </div>
+                    
 
 
                 </div>
@@ -116,7 +90,7 @@ const FlixhqInfo = () => {
                         {episodes.length} Episodes
                     </h1>
                     {episodes.map((element) => (
-                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}/${selectedServer || "vidcloud"}`} key={element.id}>
+                        <Link to={`/movies/${provider}/watch/${element.id}/${data.id}/${data.title}/${element.number || 1}`} key={element.id}>
                             <div className="flex flex-col hover:bg-gray-800 border-b-2 border-gray-800 rounded-lg p-4 my-2 transition duration-300 ease-in-out hover:scale-105">
                                 <span className="text-white text-lg font-pro-regular">{element.title}</span>
                                 {data.type === 'TV Series' ? <span className='text-xs text-[#D3D3D3]'>Episode {element.number} Season{element.season}</span> : null}

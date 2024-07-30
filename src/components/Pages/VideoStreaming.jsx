@@ -11,21 +11,21 @@ import { Link } from "react-router-dom/dist";
 import { Helmet } from "react-helmet-async";
 
 const VideoStreaming = ({ type }) => {
-  const { provider, episodeId, providerHeader, mediaId, title, episodeNumber, server } = useParams()
+  const { provider, episodeId, providerHeader, mediaId, title, episodeNumber } = useParams()
   const [sourcesUrl, setSourcesUrl] = useState("")
   const [download, setDownload] = useState('')
+  const [subtitles, setSubtitles] = useState([])
   const [sources, setSources] = useState([])
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [visible, setVisible] = useState(false);
   let url
   if (type === 'movies') {
-    url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}&server=${server}`;
+    url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch?episodeId=${episodeId}&mediaId=${providerHeader}/${mediaId}`;
   }
   else {
     url = `${import.meta.env.VITE_API_BASE_URL}/${type}/${provider}/watch/${episodeId}`;
   }
 
-  console.log(url)
   const fetchData = async () => {
     try {
       const { data } = await axios.get(url, {
@@ -35,12 +35,13 @@ const VideoStreaming = ({ type }) => {
       if (provider === "dramacool" || provider === "flixhq") { setSourcesUrl(data.sources[0].url); }
       setDownload(data.download)
       setSources(data.sources)
+      setSubtitles(data?.subtitles??[])
       return data;
     } catch (err) {
       throw new Error(err.message);
     }
   };
-  // console.log(fetchData(),sourcesUrl)
+  console.log(subtitles, "subtitles")
 
 
   const show = () => {
@@ -71,8 +72,13 @@ const VideoStreaming = ({ type }) => {
             width="100%"
             height={isMobile ? "50vh" : "100vh"}
             config={{
-              hls: {
-                // Additional HLS configuration options go here (optional)
+              file: {
+                tracks: subtitles && subtitles?.map((subtitle, index) => ({
+                  kind: 'subtitles',
+                  src: subtitle.url,
+                  label: subtitle.lang,
+                  default: index === 0,
+                })),
               },
             }}
           />
